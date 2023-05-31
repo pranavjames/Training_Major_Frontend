@@ -28,8 +28,8 @@ export class UserEnrollmentsComponent implements OnInit {
 
   ngOnInit() {
     //Displaying user enrollments
-    if(localStorage.getItem("isRemember")=="true")
-      this.userId = parseInt(localStorage.getItem("userid"));
+    if(sessionStorage.getItem("isRemember")=="true")
+      this.userId = parseInt(sessionStorage.getItem("userid"));
     else 
       this.userId = parseInt(sessionStorage.getItem("userid"));
     

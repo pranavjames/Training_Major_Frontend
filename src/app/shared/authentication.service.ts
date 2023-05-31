@@ -10,8 +10,8 @@ export class AuthenticationService {
   constructor(private http: HttpClient) {}
  
 loginStatus = new BehaviorSubject<boolean>(this.isUserLoggedIn());
-username = new BehaviorSubject<String>(localStorage.getItem("username"));
-userrole = new BehaviorSubject<String>(localStorage.getItem("userrole"));
+username = new BehaviorSubject<String>(sessionStorage.getItem("username"));
+userrole = new BehaviorSubject<String>(sessionStorage.getItem("userrole"));
 
 loginStatus1 = new BehaviorSubject<boolean>(this.isUserLoggedIn());
 username1 = new BehaviorSubject<String>(sessionStorage.getItem("username"));
@@ -26,15 +26,15 @@ userrole1 = new BehaviorSubject<String>(sessionStorage.getItem("userrole"));
       })
       .pipe(
         map((userData) => {
-          if(localStorage.getItem("isRemember")=="true")
+          if(sessionStorage.getItem("isRemember")=="true")
           {
-           localStorage.setItem("username", userData.username);
-           localStorage.setItem("userrole", userData.roles);
-           localStorage.setItem("token", "Bearer " + userData.token);
+           sessionStorage.setItem("username", userData.username);
+           sessionStorage.setItem("userrole", userData.roles);
+           sessionStorage.setItem("token", "Bearer " + userData.token);
               //emit values so that subscriber will get updated value
           this.loginStatus.next(true);
-          this.username.next(localStorage.getItem("username"));
-          this.userrole.next(localStorage.getItem("userrole"));
+          this.username.next(sessionStorage.getItem("username"));
+          this.userrole.next(sessionStorage.getItem("userrole"));
           return userData;
           }
           else
@@ -58,9 +58,9 @@ userrole1 = new BehaviorSubject<String>(sessionStorage.getItem("userrole"));
   //will get to know role and can be used to return in getROle()
 
   isUserLoggedIn() {
-    if(localStorage.getItem("isRemember")=="true")
+    if(sessionStorage.getItem("isRemember")=="true")
     {
-      let username = localStorage.getItem("username");
+      let username = sessionStorage.getItem("username");
       return !(username === null);
     }
     else
@@ -72,28 +72,28 @@ userrole1 = new BehaviorSubject<String>(sessionStorage.getItem("userrole"));
   }
   //getting user role
   getRole() {
-    if(localStorage.getItem("isRemember")=="true")
-      return localStorage.getItem("userrole");
+    if(sessionStorage.getItem("isRemember")=="true")
+      return sessionStorage.getItem("userrole");
     else    
       return sessionStorage.getItem("userrole");
   }
 
   //getting username ->email 
   getUsername() {
-    if(localStorage.getItem("isRemember")=="true")
-      return localStorage.getItem("username");
+    if(sessionStorage.getItem("isRemember")=="true")
+      return sessionStorage.getItem("username");
     else 
       return sessionStorage.getItem("username");
   }
   //logout
   logout() {
-    if(localStorage.getItem("isRemember")=="true")
+    if(sessionStorage.getItem("isRemember")=="true")
     {
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
-    localStorage.removeItem("userrole");
-    localStorage.removeItem("userid");
-    localStorage.removeItem("isRemember");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("username");
+    sessionStorage.removeItem("userrole");
+    sessionStorage.removeItem("userid");
+    sessionStorage.removeItem("isRemember");
       //emit values
       this.loginStatus.next(false);
       this.username.next(null);
@@ -101,7 +101,7 @@ userrole1 = new BehaviorSubject<String>(sessionStorage.getItem("userrole"));
     }
     else
     {
-      localStorage.removeItem("isRemember");
+      sessionStorage.removeItem("isRemember");
       sessionStorage.removeItem("token");
       sessionStorage.removeItem("username");
       sessionStorage.removeItem("userrole");

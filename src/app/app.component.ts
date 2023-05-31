@@ -24,7 +24,7 @@ export class AppComponent {
     this.router.navigate(["login"]);
   }
   ngOnInit() {
-    if (localStorage.getItem("isRemember") == "true") {
+    if (sessionStorage.getItem("isRemember") == "true") {
       this.userrole = this.as.userrole;
       this.username = this.as.username;
     } else {

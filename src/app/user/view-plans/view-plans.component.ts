@@ -33,8 +33,8 @@ export class ViewPlansComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (localStorage.getItem("isRemember") == "true")
-      this.userid = parseInt(localStorage.getItem("userid"));
+    if (sessionStorage.getItem("isRemember") == "true")
+      this.userid = parseInt(sessionStorage.getItem("userid"));
     else this.userid = parseInt(sessionStorage.getItem("userid"));
 
     this.email = sessionStorage.getItem("username");

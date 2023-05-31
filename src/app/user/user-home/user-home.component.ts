@@ -18,8 +18,8 @@ export class UserHomeComponent implements OnInit {
     this.service.getAllSports().subscribe((response) => {
       this.sports = response;
     });
-    if(localStorage.getItem("isRemember")=="true")
-      this.email = localStorage.getItem("username");
+    if(sessionStorage.getItem("isRemember")=="true")
+      this.email = sessionStorage.getItem("username");
     else
       this.email = sessionStorage.getItem("username");
 

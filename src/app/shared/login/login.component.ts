@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
 
   //Login 
   Login(data) {
-    localStorage.setItem("isRemember", this.isRemember);
+    sessionStorage.setItem("isRemember", this.isRemember);
     if (data.form.status == "INVALID") {
       this.mandatory = true;
     } else if (!this.checkEmail(data.form.value.username)) {
@@ -61,8 +61,8 @@ export class LoginComponent implements OnInit {
         (data: any) => {
           this.toastr.success("Login Successful !!", "", { timeOut: 1000 });
           this.uservice.getUserByEmail(this.username).subscribe((res: any) => {
-            if (localStorage.getItem("isRemember") == "true")
-              localStorage.setItem("userid", res.userId);
+            if (sessionStorage.getItem("isRemember") == "true")
+              sessionStorage.setItem("userid", res.userId);
             else sessionStorage.setItem("userid", res.userId);
           });
           //checking roles to navigate

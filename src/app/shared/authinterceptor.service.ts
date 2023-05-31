@@ -13,12 +13,12 @@ export class AuthinterceptorService implements HttpInterceptor {
   //modification logic will go to intercept
   constructor() {}
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    if(localStorage.getItem("isRemember")=="true")
+    if(sessionStorage.getItem("isRemember")=="true")
     {
-      if (localStorage.getItem("token") && localStorage.getItem("username")) {
+      if (sessionStorage.getItem("token") && sessionStorage.getItem("username")) {
         req = req.clone({
           setHeaders: {
-            Authorization: localStorage.getItem("token"),
+            Authorization: sessionStorage.getItem("token"),
           },
         });
       }
